@@ -1,7 +1,7 @@
-import { IStyles } from "../../types";
+import { AnimationStyles } from "../../types";
 import menuFactory from "../factories/menuFactory";
 
-const styles: IStyles = {
+const styles: AnimationStyles = {
     menuWrap(isOpen) {
       return {
         MozTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',

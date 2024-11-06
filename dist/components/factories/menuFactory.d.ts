@@ -1,4 +1,4 @@
 import { FC } from "react";
-import { IStyles, MenuProps } from "../../types";
-declare const _default: (styles: IStyles) => FC<MenuProps>;
+import { AnimationStyles, MenuProps } from "../../types";
+declare const _default: (styles: AnimationStyles) => FC<MenuProps>;
 export default _default;

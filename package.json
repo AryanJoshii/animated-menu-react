@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "An off-canvas sidebar component with a collection of effects and styles using CSS transitions and SVG path animations",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "author": "Aryan Joshi",
   "homepage": "https://github.com/AryanJoshii/react-burger-menu-v2.git",
   "repository": {
