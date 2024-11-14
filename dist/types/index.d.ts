@@ -6,18 +6,18 @@ export interface HoverState {
     isMouseIn: boolean;
 }
 export interface Styles {
-    bmBurgerButton: Partial<CSSProperties>;
-    bmBurgerBars: Partial<CSSProperties>;
-    bmBurgerBarsHover: Partial<CSSProperties>;
-    bmCrossButton: Partial<CSSProperties>;
-    bmCross: Partial<CSSProperties>;
-    bmMenuWrap: Partial<CSSProperties>;
-    bmMenu: Partial<CSSProperties>;
-    bmMorphShape: Partial<CSSProperties>;
-    bmIcon: Partial<CSSProperties>;
-    bmItemList: Partial<CSSProperties>;
-    bmItem: Partial<CSSProperties>;
-    bmOverlay: Partial<CSSProperties>;
+    bmBurgerButton?: Partial<CSSProperties>;
+    bmBurgerBars?: Partial<CSSProperties>;
+    bmBurgerBarsHover?: Partial<CSSProperties>;
+    bmCrossButton?: Partial<CSSProperties>;
+    bmCross?: Partial<CSSProperties>;
+    bmMenuWrap?: Partial<CSSProperties>;
+    bmMenu?: Partial<CSSProperties>;
+    bmMorphShape?: Partial<CSSProperties>;
+    bmIcon?: Partial<CSSProperties>;
+    bmItemList?: Partial<CSSProperties>;
+    bmItem?: Partial<CSSProperties>;
+    bmOverlay?: Partial<CSSProperties>;
 }
 export interface AnimationStyles {
     overlay?: (isOpen?: boolean, width?: string, right?: boolean) => CSSProperties;
