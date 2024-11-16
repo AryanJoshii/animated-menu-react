@@ -1,3 +1,4 @@
+import { useState } from "react";
 import * as Menus from "../../src/index";
 import { Styles } from "../../src/types";
 import "../public/assets/css/styles.css"
@@ -47,7 +48,19 @@ const styles: Styles = {
   }
 }
 
+const menus = {
+  fallDown: "Fall Down",
+  push: "Push",
+  pushRotate: "Push Rotate",
+  scaleDown: "Scale Down",
+  scaleRotate: "Scale Rotate",
+  reveal: "Reveal",
+  slide: "Slide",
+  stack: "Stack",
+}
+
 function App() {
+  const [positionMenuRight, setPositionMenuRight] = useState(false);
 
   const Menu = Menus['reveal']
   return (
@@ -73,6 +86,10 @@ function App() {
           </div>
         </div>
         <code>npm i animated-menu-react</code>
+        <div className="menu-pos">
+          <button className={`${!positionMenuRight ? "active" : ""}`} onClick={() => { setPositionMenuRight(false) }}>Left</button>
+          <button className={`${positionMenuRight ? "active" : ""}`} onClick={() => { setPositionMenuRight(true) }}>Right</button>
+        </div>
       </main>
     </div>
   )

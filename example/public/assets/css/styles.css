@@ -5,7 +5,9 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-html, #root, #outer-container {
+html,
+#root,
+#outer-container {
     height: 100%;
 }
 
@@ -24,11 +26,14 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    overflow: hidden;
 }
 
 h1 {
     font-size: 3em;
     margin-block-start: 50px;
+    position: relative;
+    z-index: 1;
 }
 
 a {
@@ -50,11 +55,15 @@ code {
     border-radius: 5px;
 }
 
-.point-gh-wrapper {
+.gh-link {
+    position: relative;
+}
+
+.gh-link .point-gh-wrapper {
     font-size: 20px;
     position: absolute;
-    top: 15%;
-    left: 65%;
+    bottom: -60px;
+    right: -100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,22 +71,57 @@ code {
     animation: pulse 2s ease-in-out infinite alternate;
 }
 
-.point-gh-wrapper .point-arrow {
+.gh-link .point-gh-wrapper .point-arrow {
     width: 1.5em;
     height: 1.5em;
     transform: rotate(360deg) scaleX(-1);
 }
 
-.point-gh-wrapper p {
+.gh-link .point-gh-wrapper p {
     font-size: .6em;
     width: 50%;
     text-align: center;
 }
 
+.menu-pos {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.menu-pos button {
+    color: #303841;
+    font-weight: 600;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.menu-pos button.active {
+    background-color: #FF7D29;
+    color: white;
+}
+
 @keyframes pulse {
     from {
         transform: rotate(15deg) scale(1);
-    } to {
+    }
+
+    to {
         transform: rotate(15deg) scale(1.1);
     }
 }
+
+@media screen and (max-width: 768px) {
+    .gh-link .point-gh-wrapper {
+        top: -10px;
+        right: 30%;
+    }
+
+    .gh-link .point-gh-wrapper .point-arrow {
+        order: 1;
+        transform: rotate(260deg) scaleX(-1);
+    }
+}   
