@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "ES6",
-    "moduleResolution": "Node10",
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2023", "DOM"],
+    "moduleResolution": "bundler",
     "declaration": true,
     "outDir": "./dist",
     "jsx": "preserve",

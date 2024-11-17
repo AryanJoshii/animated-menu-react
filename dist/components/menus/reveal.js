@@ -1,6 +1,6 @@
 import menuFactory from '../factories/menuFactory';
-var styles = {
-    menuWrap: function (isOpen, width, right) {
+const styles = {
+    menuWrap(isOpen, width, right) {
         return {
             MozTransform: 'translate3d(0, 0, 0)',
             MsTransform: 'translate3d(0, 0, 0)',
@@ -10,103 +10,103 @@ var styles = {
             zIndex: isOpen ? 1000 : -1
         };
     },
-    overlay: function (isOpen, width, right) {
+    overlay(isOpen, width, right) {
         return {
             zIndex: 1400,
             MozTransform: isOpen
                 ? right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)")
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             MsTransform: isOpen
                 ? right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)")
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             OTransform: isOpen
                 ? right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)")
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             WebkitTransform: isOpen
                 ? right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)")
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             transform: isOpen
                 ? right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)")
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             transition: 'all 0.5s',
             visibility: isOpen ? 'visible' : 'hidden'
         };
     },
-    pageWrap: function (isOpen, width, right) {
+    pageWrap(isOpen, width, right) {
         return {
             MozTransform: isOpen
                 ? ''
                 : right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)"),
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`,
             MsTransform: isOpen
                 ? ''
                 : right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)"),
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`,
             OTransform: isOpen
                 ? ''
                 : right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)"),
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`,
             WebkitTransform: isOpen
                 ? ''
                 : right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)"),
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`,
             transform: isOpen
                 ? ''
                 : right
-                    ? "translate3d(-".concat(width, ", 0, 0)")
-                    : "translate3d(".concat(width, ", 0, 0)"),
+                    ? `translate3d(-${width}, 0, 0)`
+                    : `translate3d(${width}, 0, 0)`,
             transition: 'all 0.5s',
             zIndex: 1200,
             position: 'relative'
         };
     },
-    burgerIcon: function (isOpen, width, right) {
+    burgerIcon(isOpen, width, right) {
         return {
             MozTransform: isOpen
                 ? right
-                    ? "translate3d(".concat(width, ", 0, 0)")
-                    : "translate3d(-".concat(width, ", 0, 0)")
+                    ? `translate3d(${width}, 0, 0)`
+                    : `translate3d(-${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             MsTransform: isOpen
                 ? right
-                    ? "translate3d(".concat(width, ", 0, 0)")
-                    : "translate3d(-".concat(width, ", 0, 0)")
+                    ? `translate3d(${width}, 0, 0)`
+                    : `translate3d(-${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             OTransform: isOpen
                 ? right
-                    ? "translate3d(".concat(width, ", 0, 0)")
-                    : "translate3d(-".concat(width, ", 0, 0)")
+                    ? `translate3d(${width}, 0, 0)`
+                    : `translate3d(-${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             WebkitTransform: isOpen
                 ? right
-                    ? "translate3d(".concat(width, ", 0, 0)")
-                    : "translate3d(-".concat(width, ", 0, 0)")
+                    ? `translate3d(${width}, 0, 0)`
+                    : `translate3d(-${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             transform: isOpen
                 ? right
-                    ? "translate3d(".concat(width, ", 0, 0)")
-                    : "translate3d(-".concat(width, ", 0, 0)")
+                    ? `translate3d(${width}, 0, 0)`
+                    : `translate3d(-${width}, 0, 0)`
                 : 'translate3d(0, 0, 0)',
             transition: 'all 0.1s',
             position: 'relative',
             zIndex: 1300
         };
     },
-    outerContainer: function (isOpen) {
+    outerContainer(isOpen) {
         return {
             overflow: isOpen ? '' : 'hidden'
         };

@@ -58,10 +58,10 @@ export default (styles: AnimationStyles) => {
     }
 
     const Menu: FC<MenuProps> = (passedProps) => {
-        const props = Object.assign({}, defaultProps, passedProps);
+        const props = Object.assign({}, defaultProps, passedProps); 
         const [isOpen, setIsOpen] = useState(false);
         const toggleOptions = useRef<ToggleOptions>({});
-        const timeoutId = useRef<NodeJS.Timeout | null>();
+        const timeoutId = useRef<ReturnType<typeof setTimeout> | null>();
         const prevOpenProp = usePrevious(props.open!);
 
         useEffect(() => {
@@ -113,7 +113,7 @@ export default (styles: AnimationStyles) => {
 
             // Timeout ensures wrappers are cleared after animation finishes
             clearCurrentTimeout();
-            timeoutId.current = setTimeout(() => {
+            timeoutId.current = window.setTimeout(() => {
                 timeoutId.current = null;
                 if (!isOpen) {
                     applyWrapperStyles(false);
@@ -130,7 +130,7 @@ export default (styles: AnimationStyles) => {
             };
         }, [isOpen])
 
-        const toggleMenu = (options: ToggleOptions = {}) => {
+        function toggleMenu(options: ToggleOptions = {}) {
             toggleOptions.current = options;
 
             applyWrapperStyles();
@@ -143,7 +143,7 @@ export default (styles: AnimationStyles) => {
             });
         }
 
-        const open = () => {
+        function open() {
             if (typeof props.onOpen === 'function') {
                 props.onOpen();
             } else {
@@ -151,7 +151,7 @@ export default (styles: AnimationStyles) => {
             }
         }
 
-        const close = () => {
+        function close() {
             if (typeof props.onClose === 'function') {
                 props.onClose();
             } else {
@@ -159,7 +159,7 @@ export default (styles: AnimationStyles) => {
             }
         }
 
-        const getStyleProperties = (style: StyleFunction, index?: number) => {
+        function getStyleProperties(style: StyleFunction, index?: number) {
             const { width, right } = props;
             const formattedWidth = typeof width !== 'string' ? `${width}px` : width;
             return style(isOpen, formattedWidth, right, index);

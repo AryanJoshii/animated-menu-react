@@ -1,1 +1,1 @@
-export var pxToNum = function (val) { return parseInt(val.slice(0, -2), 10); };
+export const pxToNum = (val) => parseInt(val.slice(0, -2), 10);

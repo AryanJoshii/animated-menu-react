@@ -1,3 +1,3 @@
 import menuFactory from "../factories/menuFactory";
-var styles = {};
+const styles = {};
 export default menuFactory(styles);

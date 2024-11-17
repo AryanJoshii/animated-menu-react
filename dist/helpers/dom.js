@@ -1,30 +1,30 @@
 export function focusOnFirstMenuItem() {
-    var firstItem = Array.from(document.getElementsByClassName('bm-item')).shift();
+    const firstItem = Array.from(document.getElementsByClassName('bm-item')).shift();
     if (firstItem) {
         firstItem.focus();
     }
 }
 export function focusOnLastMenuItem() {
-    var lastItem = Array.from(document.getElementsByClassName('bm-item')).pop();
+    const lastItem = Array.from(document.getElementsByClassName('bm-item')).pop();
     if (lastItem) {
         lastItem.focus();
     }
 }
 export function focusOnCrossButton() {
-    var crossButton = document.getElementById('react-burger-cross-btn');
+    const crossButton = document.getElementById('react-burger-cross-btn');
     if (crossButton) {
         crossButton.focus();
     }
 }
 export function focusOnMenuButton() {
-    var menuButton = document.getElementById('react-burger-menu-btn');
+    const menuButton = document.getElementById('react-burger-menu-btn');
     if (menuButton) {
         menuButton.focus();
     }
 }
 export function focusOnMenuItem(siblingType) {
     if (document.activeElement && document.activeElement.className.includes('bm-item')) {
-        var sibling = document.activeElement[siblingType];
+        const sibling = document.activeElement[siblingType];
         if (sibling) {
             sibling.focus();
         }

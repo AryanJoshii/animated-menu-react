@@ -1,5 +1,5 @@
-var styles = {
-    overlay: function (isOpen) {
+const styles = {
+    overlay(isOpen) {
         return {
             position: 'fixed',
             zIndex: 1000,
@@ -15,12 +15,12 @@ var styles = {
             transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
         };
     },
-    menuWrap: function (isOpen, width, right) {
+    menuWrap(isOpen, width, right) {
         return {
             position: 'fixed',
             right: right ? 0 : 'inherit',
             zIndex: 1100,
-            width: width,
+            width,
             height: '100%',
             MozTransform: isOpen
                 ? ''
@@ -50,19 +50,19 @@ var styles = {
             transition: 'all 0.5s'
         };
     },
-    menu: function () {
+    menu() {
         return {
             height: '100%',
             boxSizing: 'border-box',
             overflow: 'auto'
         };
     },
-    itemList: function () {
+    itemList() {
         return {
             height: '100%'
         };
     },
-    item: function () {
+    item() {
         return {
             display: 'block'
         };

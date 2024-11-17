@@ -1,20 +1,9 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 import { Children, cloneElement, createElement, useEffect, useRef, useState } from "react";
 import { focusOnFirstMenuItem, focusOnLastMenuItem, focusOnMenuButton, focusOnNextMenuItem, focusOnPreviousMenuItem } from "../../helpers/dom";
 import baseStyles from "../../helpers/baseStyles";
 import BurgerIcon from "../ui/BurgerIcon";
 import CrossIcon from "../ui/CrossIcon";
-var defaultProps = {
+const defaultProps = {
     bodyClassName: '',
     burgerBarClassName: '',
     burgerButtonClassName: '',
@@ -31,50 +20,50 @@ var defaultProps = {
     morphShapeClassName: '',
     noOverlay: false,
     noTransition: false,
-    onStateChange: function () { },
+    onStateChange: () => { },
     outerContainerId: '',
     overlayClassName: '',
     pageWrapId: '',
     styles: {},
     width: 300,
-    onIconHoverChange: function () { },
+    onIconHoverChange: () => { },
     itemListElement: 'nav',
 };
-export default (function (styles) {
+export default (styles) => {
     if (!styles) {
         throw new Error("No styles provided!");
     }
-    var ARROW_DOWN = 'ArrowDown';
-    var ARROW_UP = 'ArrowUp';
-    var ESCAPE = 'Escape';
-    var SPACE = ' ';
-    var HOME = 'Home';
-    var END = 'End';
-    var usePrevious = function (value) {
-        var ref = useRef(value);
-        useEffect(function () {
+    const ARROW_DOWN = 'ArrowDown';
+    const ARROW_UP = 'ArrowUp';
+    const ESCAPE = 'Escape';
+    const SPACE = ' ';
+    const HOME = 'Home';
+    const END = 'End';
+    const usePrevious = (value) => {
+        const ref = useRef(value);
+        useEffect(() => {
             ref.current = value;
         }, [value]);
         return ref.current;
     };
-    var Menu = function (passedProps) {
-        var props = Object.assign({}, defaultProps, passedProps);
-        var _a = useState(false), isOpen = _a[0], setIsOpen = _a[1];
-        var toggleOptions = useRef({});
-        var timeoutId = useRef();
-        var prevOpenProp = usePrevious(props.open);
-        useEffect(function () {
+    const Menu = (passedProps) => {
+        const props = Object.assign({}, defaultProps, passedProps);
+        const [isOpen, setIsOpen] = useState(false);
+        const toggleOptions = useRef({});
+        const timeoutId = useRef();
+        const prevOpenProp = usePrevious(props.open);
+        useEffect(() => {
             if (props.open) {
                 toggleMenu({ noStateChange: true, isOpen: true });
             }
-            return function () {
+            return () => {
                 applyWrapperStyles(false);
                 clearCurrentTimeout();
             };
         }, []);
-        useEffect(function () {
+        useEffect(() => {
             // Checks if the open prop has changed/toggled or not.
-            var hasOpenPropToggled = props.open !== undefined &&
+            const hasOpenPropToggled = props.open !== undefined &&
                 props.open !== isOpen &&
                 props.open !== prevOpenProp;
             if (hasOpenPropToggled) {
@@ -85,10 +74,10 @@ export default (function (styles) {
             }
             // TODO: Add logic for handling svg path aniations if the isOpen prop is changed.
         }, [props.open]);
-        useEffect(function () {
-            var _a = toggleOptions.current, noStateChange = _a.noStateChange, focusOnLastItem = _a.focusOnLastItem;
+        useEffect(() => {
+            const { noStateChange, focusOnLastItem } = toggleOptions.current;
             if (!noStateChange) {
-                props.onStateChange({ isOpen: isOpen });
+                props.onStateChange({ isOpen });
             }
             if (!props.disableAutoFocus) {
                 // For accessibility reasons, ensures that when we toggle open,
@@ -107,68 +96,74 @@ export default (function (styles) {
             }
             // Timeout ensures wrappers are cleared after animation finishes
             clearCurrentTimeout();
-            timeoutId.current = setTimeout(function () {
+            timeoutId.current = window.setTimeout(() => {
                 timeoutId.current = null;
                 if (!isOpen) {
                     applyWrapperStyles(false);
                 }
             }, 500);
             // Bind keydown handlers (or custom function if supplied)
-            var defaultOnKeyDown = isOpen ? onKeyDownOpen : onKeyDownClosed;
-            var onKeyDown = props.customOnKeyDown || defaultOnKeyDown;
+            const defaultOnKeyDown = isOpen ? onKeyDownOpen : onKeyDownClosed;
+            const onKeyDown = props.customOnKeyDown || defaultOnKeyDown;
             window.addEventListener('keydown', onKeyDown);
-            return function () {
+            return () => {
                 window.removeEventListener('keydown', onKeyDown);
             };
         }, [isOpen]);
-        var toggleMenu = function (options) {
-            if (options === void 0) { options = {}; }
+        function toggleMenu(options = {}) {
             toggleOptions.current = options;
             applyWrapperStyles();
             // Timeout ensures wrapper styles are applied before the menu is toggled.
-            setTimeout(function () {
-                setIsOpen(function (open) {
-                    return typeof options.isOpen !== 'undefined' ? options.isOpen : !open;
-                });
+            setTimeout(() => {
+                setIsOpen(open => typeof options.isOpen !== 'undefined' ? options.isOpen : !open);
             });
-        };
-        var open = function () {
+        }
+        function open() {
             if (typeof props.onOpen === 'function') {
                 props.onOpen();
             }
             else {
                 toggleMenu();
             }
-        };
-        var close = function () {
+        }
+        function close() {
             if (typeof props.onClose === 'function') {
                 props.onClose();
             }
             else {
                 toggleMenu();
             }
-        };
-        var getStyleProperties = function (style, index) {
-            var width = props.width, right = props.right;
-            var formattedWidth = typeof width !== 'string' ? "".concat(width, "px") : width;
+        }
+        function getStyleProperties(style, index) {
+            const { width, right } = props;
+            const formattedWidth = typeof width !== 'string' ? `${width}px` : width;
             return style(isOpen, formattedWidth, right, index);
-        };
+        }
         // Builds styles incrementally for a given element
-        var getStyles = function (el, index, inline) {
-            var propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
+        const getStyles = (el, index, inline) => {
+            const propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
             // Set base styles
-            var output = baseStyles[el] ? getStyleProperties(baseStyles[el]) : {};
+            let output = baseStyles[el] ? getStyleProperties(baseStyles[el]) : {};
             // Add animation-specific styles
             if (styles[el]) {
-                output = __assign(__assign({}, output), getStyleProperties(styles[el], index + 1));
+                output = {
+                    ...output,
+                    ...getStyleProperties(styles[el], index + 1)
+                };
             }
             // Add custom styles
             if (props.styles && propName in props.styles) {
-                output = __assign(__assign({}, output), (props.styles[propName]));
+                output = {
+                    ...output,
+                    ...(props.styles[propName])
+                };
             }
             // Add element inline styles
             if (inline) {
-                output = __assign(__assign({}, output), inline);
+                output = {
+                    ...output,
+                    ...inline
+                };
             }
             // Remove transition if required
             // (useful if rendering open initially)
@@ -181,27 +176,27 @@ export default (function (styles) {
         // This is necessary for correct page interaction with some of the menus
         // Throws and returns if the required external elements don't exist,
         // which means any external page animations won't be applied
-        var handleExternalWrapper = function (id, wrapperStyles, set) {
-            var wrapper = document.getElementById(id);
+        const handleExternalWrapper = (id, wrapperStyles, set) => {
+            const wrapper = document.getElementById(id);
             if (!wrapper) {
                 console.error("Element with ID '" + id + "' not found");
                 return;
             }
-            var builtStyles = getStyleProperties(wrapperStyles);
-            for (var _prop in builtStyles) {
+            const builtStyles = getStyleProperties(wrapperStyles);
+            for (const _prop in builtStyles) {
                 if (builtStyles.hasOwnProperty(_prop)) {
-                    var prop_1 = _prop;
-                    wrapper.style[prop_1] = set ? builtStyles[prop_1] : '';
+                    const prop = _prop;
+                    wrapper.style[prop] = set ? builtStyles[prop] : '';
                 }
             }
-            var prop = 'accentColor';
+            const prop = 'accentColor';
             wrapper.style[prop];
             // Prevent any horizontal scroll
             // Only set overflow-x as an inline style if htmlClassName or
             // bodyClassName is not passed in. Otherwise, it is up to the caller to
             // decide if they want to set the overflow style in CSS using the custom
             // class names
-            var applyOverflow = function (el) { return (el.style['overflowX'] = set ? 'hidden' : ''); };
+            const applyOverflow = (el) => (el.style['overflowX'] = set ? 'hidden' : '');
             if (!props.htmlClassName) {
                 applyOverflow(document.querySelector('html'));
             }
@@ -209,9 +204,8 @@ export default (function (styles) {
                 applyOverflow(document.querySelector('body'));
             }
         };
-        var applyWrapperStyles = function (set) {
-            if (set === void 0) { set = true; }
-            var applyClass = function (el, className) { return el.classList[set ? 'add' : 'remove'](className); };
+        const applyWrapperStyles = (set = true) => {
+            const applyClass = (el, className) => el.classList[set ? 'add' : 'remove'](className);
             if (props.htmlClassName) {
                 applyClass(document.querySelector('html'), props.htmlClassName);
             }
@@ -224,7 +218,7 @@ export default (function (styles) {
             if (styles.outerContainer && props.outerContainerId) {
                 handleExternalWrapper(props.outerContainerId, styles.outerContainer, set);
             }
-            var menuWrap = document.querySelector('.bm-menu-wrap');
+            const menuWrap = document.querySelector('.bm-menu-wrap');
             if (menuWrap) {
                 if (set) {
                     menuWrap.removeAttribute('hidden');
@@ -234,12 +228,12 @@ export default (function (styles) {
                 }
             }
         };
-        var clearCurrentTimeout = function () {
+        const clearCurrentTimeout = () => {
             if (timeoutId.current) {
                 clearTimeout(timeoutId.current);
             }
         };
-        var onKeyDownOpen = function (e) {
+        const onKeyDownOpen = (e) => {
             switch (e.key) {
                 case ESCAPE:
                     // Close on ESC, unless disabled
@@ -262,7 +256,7 @@ export default (function (styles) {
                     break;
             }
         };
-        var onKeyDownClosed = function (e) {
+        const onKeyDownClosed = (e) => {
             // Key downs came from menu button
             if (e.target === document.getElementById('react-burger-menu-btn')) {
                 switch (e.key) {
@@ -278,7 +272,7 @@ export default (function (styles) {
                 }
             }
         };
-        var handleOverlayClick = function () {
+        const handleOverlayClick = () => {
             if (props.disableOverlayClick === true ||
                 (typeof props.disableOverlayClick === 'function' && props.disableOverlayClick())) {
                 return;
@@ -288,30 +282,35 @@ export default (function (styles) {
             }
         };
         return (<div>
-                {!props.noOverlay && (<div className={"bm-overlay ".concat(props.overlayClassName).trim()} onClick={handleOverlayClick} style={getStyles('overlay')}/>)}
+                {!props.noOverlay && (<div className={`bm-overlay ${props.overlayClassName}`.trim()} onClick={handleOverlayClick} style={getStyles('overlay')}/>)}
                 {props.customBurgerIcon !== false && (<div style={getStyles('burgerIcon')}>
                         <BurgerIcon onClick={open} styles={props.styles} customIcon={props.customBurgerIcon} className={props.burgerButtonClassName} barClassName={props.burgerBarClassName} onIconHoverChange={props.onIconHoverChange}/>
                     </div>)}
-                <div id={props.id} className={"bm-menu-wrap ".concat(props.className).trim()} style={getStyles('menuWrap')} aria-hidden={!isOpen}>
-                    {styles.svg && (<div id="bm-morph-shape" className={"bm-morph-shape ".concat(props.morphShapeClassName).trim()} style={getStyles('morphShape')}>
+                <div id={props.id} className={`bm-menu-wrap ${props.className}`.trim()} style={getStyles('menuWrap')} aria-hidden={!isOpen}>
+                    {styles.svg && (<div id="bm-morph-shape" className={`bm-morph-shape ${props.morphShapeClassName}`.trim()} style={getStyles('morphShape')}>
                             <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
                                 <path d={styles.svg.pathInitial}/>
                             </svg>
                         </div>)}
-                    <div className={"bm-menu ".concat(props.menuClassName).trim()} style={getStyles('menu')}>
+                    <div className={`bm-menu ${props.menuClassName}`.trim()} style={getStyles('menu')}>
                         {createElement(props.itemListElement, {
-                className: "bm-item-list ".concat(props.itemListClassName).trim(),
+                className: `bm-item-list ${props.itemListClassName}`.trim(),
                 style: getStyles('itemList')
-            }, Children.map(props.children, function (item, index) {
+            }, Children.map(props.children, (item, index) => {
                 if (item) {
-                    var classList = [
+                    const classList = [
                         'bm-item',
                         props.itemClassName,
                         item.props.className
                     ]
-                        .filter(function (className) { return !!className; })
+                        .filter(className => !!className)
                         .join(' ');
-                    var extraProps = __assign({ key: index, className: classList, style: getStyles('item', index, item.props.style) }, (!isOpen && { tabIndex: -1 }));
+                    const extraProps = {
+                        key: index,
+                        className: classList,
+                        style: getStyles('item', index, item.props.style),
+                        ...(!isOpen && { tabIndex: -1 })
+                    };
                     return cloneElement(item, extraProps);
                 }
             }))}
@@ -323,4 +322,4 @@ export default (function (styles) {
             </div>);
     };
     return Menu;
-});
+};
