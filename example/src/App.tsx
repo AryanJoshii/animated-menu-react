@@ -1,7 +1,6 @@
 import { useState } from "react";
 import * as Menus from "../../src/index";
 import { Styles } from "../../src/types";
-import "../public/assets/css/styles.css"
 
 const styles: Styles = {
   bmBurgerButton: {

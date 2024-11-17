@@ -17,5 +17,6 @@
     "./example/**/*",
     "./dist/**/*",
     "node_modules" 
-  ]
+  ],
+  "include": ["src"]
 }
