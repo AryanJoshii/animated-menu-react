@@ -1,6 +1,20 @@
-import { useState } from "react";
-import * as Menus from "../../src/index";
-import { Styles } from "../../src/types";
+import { CSSProperties, useState } from "react";
+import * as Menus from 'animated-menu-react'
+
+interface Styles {
+  bmBurgerButton?: Partial<CSSProperties>;
+  bmBurgerBars?: Partial<CSSProperties>;
+  bmBurgerBarsHover?: Partial<CSSProperties>;
+  bmCrossButton?: Partial<CSSProperties>;
+  bmCross?: Partial<CSSProperties>;
+  bmMenuWrap?: Partial<CSSProperties>;
+  bmMenu?: Partial<CSSProperties>;
+  bmMorphShape?: Partial<CSSProperties>;
+  bmIcon?: Partial<CSSProperties>;
+  bmItemList?: Partial<CSSProperties>;
+  bmItem?: Partial<CSSProperties>;
+  bmOverlay?: Partial<CSSProperties>;
+}
 
 const styles: Styles = {
   bmBurgerButton: {
@@ -47,21 +61,21 @@ const styles: Styles = {
   }
 }
 
-const menus = {
-  fallDown: "Fall Down",
-  push: "Push",
-  pushRotate: "Push Rotate",
-  scaleDown: "Scale Down",
-  scaleRotate: "Scale Rotate",
-  reveal: "Reveal",
-  slide: "Slide",
-  stack: "Stack",
-}
+// const menus = {
+//   fallDown: "Fall Down",
+//   push: "Push",
+//   pushRotate: "Push Rotate",
+//   scaleDown: "Scale Down",
+//   scaleRotate: "Scale Rotate",
+//   reveal: "Reveal",
+//   slide: "Slide",
+//   stack: "Stack",
+// }
 
 function App() {
   const [positionMenuRight, setPositionMenuRight] = useState(false);
 
-  const Menu = Menus['reveal']
+  const Menu = Menus['reveal'];
   return (
     <div id="outer-container">
       <Menu styles={styles} pageWrapId="page-wrap" outerContainerId="outer-container">
