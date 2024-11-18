@@ -61,7 +61,7 @@ export default (styles: AnimationStyles) => {
         const props = Object.assign({}, defaultProps, passedProps); 
         const [isOpen, setIsOpen] = useState(false);
         const toggleOptions = useRef<ToggleOptions>({});
-        const timeoutId = useRef<ReturnType<typeof setTimeout> | null>();
+        const timeoutId = useRef<number | null>();
         const prevOpenProp = usePrevious(props.open!);
 
         useEffect(() => {

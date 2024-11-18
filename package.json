@@ -3,7 +3,8 @@
     "scripts": {
         "build": "turbo build",
         "dev": "turbo dev",
-        "lint": "turbo lint"
+        "lint": "turbo lint",
+        "publish-package": "turbo run build && changeset version && changeset publish"
     },
     "packageManager": "npm@10.8.2",
     "workspaces": [
@@ -11,6 +12,7 @@
         "package"
     ],
     "devDependencies": {
+        "@changesets/cli": "^2.27.9",
         "turbo": "^2.3.0"
     }
 }
