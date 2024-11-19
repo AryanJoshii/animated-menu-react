@@ -1,6 +1,6 @@
 {
   "name": "animated-menu-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An off-canvas sidebar component with a collection of effects and styles using CSS transitions",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

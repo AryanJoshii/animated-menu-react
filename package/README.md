@@ -3,9 +3,9 @@ Animated Menu React
 
 An off-canvas sidebar React component with a collection of effects and styles using CSS transitions.
 
-## Credit
+## Acknowledgement
 
-This package is a TypeScript-based rewrite of the [react-burget-menu](https://github.com/negomi/react-burger-menu) by [negomi](https://github.com/negomi), using modern React practises. Special thanks to [react-burget-menu](https://github.com/negomi/react-burger-menu) owner and contributors for their foundational code and detailed README.
+This package is a TypeScript-based rewrite of the [react-burget-menu](https://github.com/negomi/react-burger-menu) package by [negomi](https://github.com/negomi), using modern React practises. Special thanks to [react-burget-menu](https://github.com/negomi/react-burger-menu) owner and contributors for their foundational code and detailed README.
 
 Original library's license can be found [here](https://github.com/negomi/react-burger-menu/blob/main/LICENSE).
 
@@ -169,7 +169,7 @@ Called when:
 You can detect whether the sidebar is open or closed by passing a callback function to `onStateChange`. The callback will receive an object containing the new state as its first argument.
 
 ``` javascript
-var isMenuOpen = function(state) {
+const isMenuOpen = (state) => {
   return state.isOpen;
 };
 
@@ -189,11 +189,11 @@ By default, the menu will close when the Escape key is pressed. To disable this 
 For more control over global keypress functionality, you can override the handler that this component sets for `window.addEventListener('keydown', handler)`, and pass a custom function. This could be useful if you are using multiple instances of this component, for example, and want to implement functionality to ensure that a single press of the Escape key closes them all.
 
 ``` javascript
-const closeAllMenusOnEsc = (e) => {
-  e = e || window.event;
+const [areMenusOpen, setAreMenusOpen] = useState(true);
 
+const closeAllMenusOnEsc = (e) => {
   if (e.key === 'Escape' || e.keyCode === 27) {
-    this.setState({areMenusOpen: false});
+    setAreMenusOpen(false);
   }
 };
 
@@ -245,7 +245,7 @@ You can also disable the icon elements so they won't be included at all, by pass
 <Menu customCrossIcon={ false } />
 ```
 
-This can be useful if you want exclusive external control of the menu, using the `isOpen` prop.
+This can be useful if you want exclusive external control of the menu, using the `open` prop.
 
 #### Custom ID and/or classNames
 
@@ -435,3 +435,5 @@ Check the FAQ (https://github.com/negomi/react-burger-menu/wiki/FAQ) to see if y
 ### License
 
 MIT
+
+change
