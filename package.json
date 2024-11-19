@@ -4,7 +4,9 @@
         "build": "turbo build",
         "dev": "turbo dev",
         "lint": "turbo lint",
-        "publish-package": "turbo run build && changeset version && changeset publish"
+        "package:changeset": "changeset",
+        "package:version": "changeset version",
+        "package:publish": "turbo run build && changeset publish"
     },
     "packageManager": "npm@10.8.2",
     "workspaces": [
