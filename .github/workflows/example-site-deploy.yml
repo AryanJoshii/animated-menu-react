@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Configure git
+      run: |
+        # configure git user.name and user.email
+        git config user.name "$git log -n 1 --pretty=format:%an)"
+        git config user.email "$(git log -n 1 --pretty=format:%ae)"
+
     - name: Checkout main branch
       uses: actions/checkout@v4
       with:
@@ -33,7 +39,7 @@ jobs:
         mv example-site/dist/* .  # Move contents of the 'example-site/dist' folder to the root of gh-pages-deploy branch
         rm -rf example-site  # Clean up the folder path
 
-    - name: Commit changes
+    - name: Commit changes  
       run: |
         git add .
         timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')  # Get current UTC timestamp in ISO 8601 format
