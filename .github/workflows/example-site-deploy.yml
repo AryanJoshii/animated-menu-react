@@ -1,0 +1,36 @@
+name: Deploy example website
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to 'main' branch
+    paths:
+      - 'example-site/**'  # Trigger only if changes occur inside the 'example' folder
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout gh-pages-deploy branch
+      uses: actions/checkout@v4
+      with:
+        ref: gh-pages-deploy  # Checkout gh-pages-deploy branch to make changes
+
+    - name: Clear gh-pages-deploy branch content
+      run: |
+        git rm -rf .  # Remove all files in gh-pages-deploy branch
+
+    - name: Copy folder contents from main branch
+      run: |
+        # Copy the contents of the folder from the main branch to the root of the gh-pages-deploy branch
+        git checkout main -- example-site/dist  # Checkout only the 'example-site' folder from main branch
+        mv example-site/dist/* .  # Move contents of the 'example-site' folder to the root of gh-pages-deploy branch
+        rm -rf example-site  # Clean up the folder path
+
+    - name: Commit changes
+      run: |
+        git add .
+        timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')  # Get current UTC timestamp in ISO 8601 format
+        git commit -m "deploy $timestamp"  # Use the UTC timestamp as the commit message
+        git push origin gh-pages-deploy  # Push changes to the deploy branch
