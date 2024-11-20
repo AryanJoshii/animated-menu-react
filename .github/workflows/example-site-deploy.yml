@@ -29,6 +29,7 @@ jobs:
     - name: Copy folder contents from main branch
       uses: actions/checkout@v4
       run: |
+        # Copy the contents of the folder from the main branch to the root of the gh-pages-deploy branch
         git checkout main -- example-site/dist  # Checkout only the 'example-site/dist' folder from main branch
         mv example-site/dist/* .  # Move contents of the 'example-site/dist' folder to the root of gh-pages-deploy branch
         rm -rf example-site  # Clean up the folder path
