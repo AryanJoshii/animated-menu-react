@@ -11,17 +11,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    - name: Checkout main branch
+      uses: actions/checkout@v4
+
     steps:
     - name: Configure git
       run: |
         # configure git user.name and user.email
         git config user.name "$git log -n 1 --pretty=format:%an)"
         git config user.email "$(git log -n 1 --pretty=format:%ae)"
-
-    - name: Checkout main branch
-      uses: actions/checkout@v4
-      with:
-        ref: main  # Ensure we are checking out the main branch
 
     - name: Checkout gh-pages-deploy branch
       uses: actions/checkout@v4
