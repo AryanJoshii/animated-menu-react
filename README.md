@@ -3,11 +3,11 @@ Animated Menu React
 
 An off-canvas sidebar React component with a collection of effects and styles using CSS transitions.
 
-## Acknowledgement
+## Acknowledgements
 
-This package is a TypeScript-based rewrite of the [react-burget-menu](https://github.com/negomi/react-burger-menu) package by [negomi](https://github.com/negomi), using modern React practises. Special thanks to [react-burget-menu](https://github.com/negomi/react-burger-menu) owner and contributors for their foundational code and detailed README.
+Special thanks to, [react-burget-menu](https://github.com/negomi/react-burger-menu) package owner [negomi](https://github.com/negomi) and contributors for foundational code and detailed README. The original library's license is available [here](https://github.com/negomi/react-burger-menu/blob/main/LICENSE).
 
-Original library's license can be found [here](https://github.com/negomi/react-burger-menu/blob/main/LICENSE).
+Thanks to [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-burger-menu) team for type definitions used in this package.
 
 ## Demo & examples
 

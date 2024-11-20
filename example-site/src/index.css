@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
 
 html,
@@ -25,8 +26,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  overflow: hidden;
+  gap: 50px;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -38,13 +39,10 @@ h1 {
 
 a {
   text-decoration: none;
-}
-
-h1 a {
   color: #303841;
 }
 
-h1 a:hover {
+a:hover {
   color: #FF7D29;
 }
 
@@ -62,8 +60,10 @@ code {
 .gh-link .point-gh-wrapper {
   font-size: 20px;
   position: absolute;
-  bottom: -60px;
-  right: -100px;
+  top: -10px;
+  left: 50%;
+  bottom: unset;
+  right: unset;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,7 +74,8 @@ code {
 .gh-link .point-gh-wrapper .point-arrow {
   width: 1.5em;
   height: 1.5em;
-  transform: rotate(360deg) scaleX(-1);
+  order: 1;
+  transform: rotate(260deg) scaleX(-1);
 }
 
 .gh-link .point-gh-wrapper p {
@@ -83,25 +84,44 @@ code {
   text-align: center;
 }
 
-.menu-pos {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  border-radius: 5px;
-}
-
-.menu-pos button {
+button {
   color: #303841;
   font-weight: 600;
   border: none;
-  padding: 10px 20px;
   cursor: pointer;
   text-transform: uppercase;
 }
 
-.menu-pos button.active {
+button.active {
   background-color: #FF7D29;
   color: white;
+}
+
+.menu-pos {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: 5px;
+}
+
+.menu-pos button {
+  padding: 10px 20px;
+}
+
+.menu-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+}
+
+.menu-btn-grid button {
+  padding: 30px;
+  border-radius: 5px;
+}
+
+footer {
+  color: #303841;
 }
 
 @keyframes pulse {
@@ -114,14 +134,26 @@ code {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 425px) {
+  .menu-btn-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 768px) {
   .gh-link .point-gh-wrapper {
-    top: -10px;
-    right: 30%;
+    bottom: -60px;
+    right: -100px;
+    top: unset;
+    left: unset;
   }
 
   .gh-link .point-gh-wrapper .point-arrow {
-    order: 1;
-    transform: rotate(260deg) scaleX(-1);
+    order: 0;
+    transform: rotate(360deg) scaleX(-1);
+  }
+
+  .menu-btn-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -16,72 +16,85 @@ interface Styles {
   bmOverlay?: Partial<CSSProperties>;
 }
 
-const styles: Styles = {
-  bmBurgerButton: {
-    position: 'fixed',
-    width: '36px',
-    height: '30px',
-    left: '36px',
-    top: '36px'
-  },
-  bmBurgerBars: {
-    background: '#373a47'
-  },
-  bmBurgerBarsHover: {
-    background: '#a90000'
-  },
-  bmCrossButton: {
-    height: '24px',
-    width: '24px'
-  },
-  bmCross: {
-    background: '#bdc3c7'
-  },
-  bmMenuWrap: {
-    position: 'fixed',
-    height: '100%'
-  },
-  bmMenu: {
-    background: '#373a47',
-    padding: '2.5em 1.5em 0',
-    fontSize: '1.15em'
-  },
-  bmMorphShape: {
-    fill: '#373a47'
-  },
-  bmItemList: {
-    color: '#b8b7ad',
-    padding: '0.8em'
-  },
-  bmItem: {
-    display: 'inline-block'
-  },
-  bmOverlay: {
-    background: 'rgba(0, 0, 0, 0.3)'
-  }
+
+const menus = {
+  slide: "Slide",
+  fallDown: "Fall Down",
+  push: "Push",
+  pushRotate: "Push Rotate",
+  scaleDown: "Scale Down",
+  scaleRotate: "Scale Rotate",
+  reveal: "Reveal",
+  stack: "Stack",
 }
 
-// const menus = {
-//   fallDown: "Fall Down",
-//   push: "Push",
-//   pushRotate: "Push Rotate",
-//   scaleDown: "Scale Down",
-//   scaleRotate: "Scale Rotate",
-//   reveal: "Reveal",
-//   slide: "Slide",
-//   stack: "Stack",
-// }
-
 function App() {
+  const [selectedMenu, setSelectedMenu] = useState<keyof typeof menus>("slide");
   const [positionMenuRight, setPositionMenuRight] = useState(false);
+  
+  const styles: Styles = {
+    bmBurgerButton: {
+      position: 'fixed',
+      width: '36px',
+      height: '30px',
+      left: !positionMenuRight ? '36px' : 'unset',
+      right: positionMenuRight ? '36px' : 'unset',
+      top: '36px'
+    },
+    bmBurgerBars: {
+      background: '#303841'
+    },
+    bmBurgerBarsHover: {
+      background: '#a90000'
+    },
+    bmCrossButton: {
+      height: '24px',
+      width: '24px'
+    },
+    bmCross: {
+      background: '#303841'
+    },
+    bmMenuWrap: {
+      position: 'fixed',
+      height: '100%'
+    },
+    bmMenu: {
+      background: 'white',
+      padding: '2.5em 1.5em 0',
+      fontSize: '1.15em',
+    },
+    bmMorphShape: {
+      fill: '#373a47'
+    },
+    bmItemList: {
+      padding: '0.8em',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '20px'
+    },
+    bmItem: {
+      display: 'inline-block'
+    },
+    bmOverlay: {
+      background: 'rgba(0, 0, 0, 0.3)'
+    }
+  }
 
-  const Menu = Menus['reveal'];
+  const RenderMenu = () => {
+    const Menu = Menus[selectedMenu];
+    return (
+      <Menu styles={styles} pageWrapId="page-wrap" outerContainerId="outer-container" right={positionMenuRight}>
+        <a href="">Home</a>
+        <a href="">About</a>
+        <a href="">Contact</a>
+        <a href="">Projects</a>
+      </Menu>
+    );
+  };
+
   return (
     <div id="outer-container">
-      <Menu styles={styles} pageWrapId="page-wrap" outerContainerId="outer-container">
-        <a href="">LINK</a>
-        <a href="">LINK</a>
-      </Menu>
+      <RenderMenu />
       <main id="page-wrap">
         <div className="gh-link">
           <h1>
@@ -103,6 +116,21 @@ function App() {
           <button className={`${!positionMenuRight ? "active" : ""}`} onClick={() => { setPositionMenuRight(false) }}>Left</button>
           <button className={`${positionMenuRight ? "active" : ""}`} onClick={() => { setPositionMenuRight(true) }}>Right</button>
         </div>
+        <div className="menu-btn-grid">
+          {
+            typeof menus === "object" &&
+            Object.entries(menus).map(([key, value]) => (
+              <button
+                key={key}
+                className={`${key === selectedMenu ? 'active' : ''}`}
+                onClick={() => setSelectedMenu(key as keyof typeof menus)}
+              >
+                {value}
+              </button>
+            ))
+          }
+        </div>
+        <footer><a href="https://github.com/AryanJoshii">Aryan Joshi</a> | ©️ {new Date().getFullYear()}</footer>
       </main>
     </div>
   )
