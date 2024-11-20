@@ -10,11 +10,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    
+    steps:
     - name: Checkout main branch
       uses: actions/checkout@v4
 
-    steps:
     - name: Configure git
       run: |
         # configure git user.name and user.email
