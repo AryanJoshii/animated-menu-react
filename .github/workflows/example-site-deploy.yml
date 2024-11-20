@@ -19,7 +19,7 @@ jobs:
 
     - name: Clear gh-pages-deploy branch content
       run: |
-        git ls-files -z | grep -v '\.gitignore' | xargs -0 git rm -f # Remove all files in gh-pages-deploy branch except .gitignore 
+        git ls-files -z -- ':!:.gitignore' | xargs -0 git rm -f # Remove all files in gh-pages-deploy branch except .gitignore 
 
     - name: Copy folder contents from main branch
       run: |
