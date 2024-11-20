@@ -27,12 +27,9 @@ jobs:
         git ls-files -z -- ':!:.gitignore' | xargs -0 git rm -f # Remove all files in gh-pages-deploy branch except .gitignore 
 
     - name: Copy folder contents from main branch
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: example/dist
-
-    - name: Move contents from example/dist folder to root
       run: |
+        # Copy the contents of the folder from the main branch to the root of the gh-pages-deploy branch
+        git checkout origin/main -- example-site/dist  # Checkout only the 'example-site/dist' folder from main branch
         mv example-site/dist/* .  # Move contents of the 'example-site/dist' folder to the root of gh-pages-deploy branch
         rm -rf example-site  # Clean up the folder path
 
