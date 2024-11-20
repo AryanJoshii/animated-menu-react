@@ -19,13 +19,12 @@ jobs:
 
     - name: Clear gh-pages-deploy branch content
       run: |
-        git rm -rf .  # Remove all files in gh-pages-deploy branch
+        git ls-files -z | grep -v '\.gitignore' | xargs -0 git rm -f # Remove all files in gh-pages-deploy branch except .gitignore 
 
     - name: Copy folder contents from main branch
       run: |
-        # Copy the contents of the folder from the main branch to the root of the gh-pages-deploy branch
-        git checkout main -- example-site/dist  # Checkout only the 'example-site' folder from main branch
-        mv example-site/dist/* .  # Move contents of the 'example-site' folder to the root of gh-pages-deploy branch
+        git checkout main -- example-site/dist  # Checkout only the 'example-site/dist' folder from main branch
+        mv example-site/dist/* .  # Move contents of the 'example-site/dist' folder to the root of gh-pages-deploy branch
         rm -rf example-site  # Clean up the folder path
 
     - name: Commit changes
