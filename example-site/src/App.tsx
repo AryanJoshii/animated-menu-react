@@ -130,7 +130,7 @@ function App() {
             ))
           }
         </div>
-        <footer><a href="https://github.com/AryanJoshii">Aryan Joshi</a> | ©️ {new Date().getFullYear()}</footer>
+        <footer><a href="https://github.com/AryanJoshii">Aryan Joshi</a> | &copy; {new Date().getFullYear()}</footer>
       </main>
     </div>
   )
