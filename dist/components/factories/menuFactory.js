@@ -1,3 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Children, cloneElement, createElement, useEffect, useRef, useState } from "react";
 import { focusOnFirstMenuItem, focusOnLastMenuItem, focusOnMenuButton, focusOnNextMenuItem, focusOnPreviousMenuItem } from "../../helpers/dom";
 import baseStyles from "../../helpers/baseStyles";
@@ -281,45 +282,27 @@ export default (styles) => {
                 close();
             }
         };
-        return (<div>
-                {!props.noOverlay && (<div className={`bm-overlay ${props.overlayClassName}`.trim()} onClick={handleOverlayClick} style={getStyles('overlay')}/>)}
-                {props.customBurgerIcon !== false && (<div style={getStyles('burgerIcon')}>
-                        <BurgerIcon onClick={open} styles={props.styles} customIcon={props.customBurgerIcon} className={props.burgerButtonClassName} barClassName={props.burgerBarClassName} onIconHoverChange={props.onIconHoverChange}/>
-                    </div>)}
-                <div id={props.id} className={`bm-menu-wrap ${props.className}`.trim()} style={getStyles('menuWrap')} aria-hidden={!isOpen}>
-                    {styles.svg && (<div id="bm-morph-shape" className={`bm-morph-shape ${props.morphShapeClassName}`.trim()} style={getStyles('morphShape')}>
-                            <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
-                                <path d={styles.svg.pathInitial}/>
-                            </svg>
-                        </div>)}
-                    <div className={`bm-menu ${props.menuClassName}`.trim()} style={getStyles('menu')}>
-                        {createElement(props.itemListElement, {
-                className: `bm-item-list ${props.itemListClassName}`.trim(),
-                style: getStyles('itemList')
-            }, Children.map(props.children, (item, index) => {
-                if (item) {
-                    const classList = [
-                        'bm-item',
-                        props.itemClassName,
-                        item.props.className
-                    ]
-                        .filter(className => !!className)
-                        .join(' ');
-                    const extraProps = {
-                        key: index,
-                        className: classList,
-                        style: getStyles('item', index, item.props.style),
-                        ...(!isOpen && { tabIndex: -1 })
-                    };
-                    return cloneElement(item, extraProps);
-                }
-            }))}
-                    </div>
-                    {props.customCrossIcon !== false && (<div style={getStyles('closeButton')}>
-                            <CrossIcon onClick={close} styles={props.styles} customIcon={props.customCrossIcon} className={props.crossButtonClassName} crossClassName={props.crossClassName} isOpen={isOpen}/>
-                        </div>)}
-                </div>
-            </div>);
+        return (_jsxs("div", { children: [!props.noOverlay && (_jsx("div", { className: `bm-overlay ${props.overlayClassName}`.trim(), onClick: handleOverlayClick, style: getStyles('overlay') })), props.customBurgerIcon !== false && (_jsx("div", { style: getStyles('burgerIcon'), children: _jsx(BurgerIcon, { onClick: open, styles: props.styles, customIcon: props.customBurgerIcon, className: props.burgerButtonClassName, barClassName: props.burgerBarClassName, onIconHoverChange: props.onIconHoverChange }) })), _jsxs("div", { id: props.id, className: `bm-menu-wrap ${props.className}`.trim(), style: getStyles('menuWrap'), "aria-hidden": !isOpen, children: [styles.svg && (_jsx("div", { id: "bm-morph-shape", className: `bm-morph-shape ${props.morphShapeClassName}`.trim(), style: getStyles('morphShape'), children: _jsx("svg", { width: "100%", height: "100%", viewBox: "0 0 100 800", preserveAspectRatio: "none", children: _jsx("path", { d: styles.svg.pathInitial }) }) })), _jsx("div", { className: `bm-menu ${props.menuClassName}`.trim(), style: getStyles('menu'), children: createElement(props.itemListElement, {
+                                className: `bm-item-list ${props.itemListClassName}`.trim(),
+                                style: getStyles('itemList')
+                            }, Children.map(props.children, (item, index) => {
+                                if (item) {
+                                    const classList = [
+                                        'bm-item',
+                                        props.itemClassName,
+                                        item.props.className
+                                    ]
+                                        .filter(className => !!className)
+                                        .join(' ');
+                                    const extraProps = {
+                                        key: index,
+                                        className: classList,
+                                        style: getStyles('item', index, item.props.style),
+                                        ...(!isOpen && { tabIndex: -1 })
+                                    };
+                                    return cloneElement(item, extraProps);
+                                }
+                            })) }), props.customCrossIcon !== false && (_jsx("div", { style: getStyles('closeButton'), children: _jsx(CrossIcon, { onClick: close, styles: props.styles, customIcon: props.customCrossIcon, className: props.crossButtonClassName, crossClassName: props.crossClassName, isOpen: isOpen }) }))] })] }));
     };
     return Menu;
 };

@@ -1,3 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { cloneElement, useState } from "react";
 const buttonStyle = {
     position: 'absolute',
@@ -38,32 +39,25 @@ const BurgerIcon = (props) => {
             return cloneElement(props.customIcon, extraProps);
         }
         else {
-            return (<span>
-                    {[1, 2, 3].map(bar => (<span key={bar} className={`bm-burger-bars ${props.barClassName} ${hover ? 'bm-burger-bars-hover' : ''}`.trim()} style={{
+            return (_jsx("span", { children: [1, 2, 3].map(bar => (_jsx("span", { className: `bm-burger-bars ${props.barClassName} ${hover ? 'bm-burger-bars-hover' : ''}`.trim(), style: {
                         ...getLineStyle(bar),
                         ...(props.styles && props.styles.bmBurgerBars)
-                    }}/>))}
-                </span>);
+                    } }, bar))) }));
         }
     };
-    return (<div className={`bm-burger-button ${props.className}`.trim()} style={{
+    return (_jsxs("div", { className: `bm-burger-button ${props.className}`.trim(), style: {
             ...{ zIndex: 1000 },
             ...(props.styles?.bmBurgerButton)
-        }}>
-            <button type="button" id="react-burger-menu-btn" onClick={props.onClick} onMouseOver={() => {
-            setHover(true);
-            if (props.onIconHoverChange) {
-                props.onIconHoverChange({ isMouseIn: true });
-            }
-        }} onMouseOut={() => {
-            setHover(false);
-            if (props.onIconHoverChange) {
-                props.onIconHoverChange({ isMouseIn: false });
-            }
-        }} style={buttonStyle}>
-                Open Menu
-            </button>
-            <Icon />
-        </div>);
+        }, children: [_jsx("button", { type: "button", id: "react-burger-menu-btn", onClick: props.onClick, onMouseOver: () => {
+                    setHover(true);
+                    if (props.onIconHoverChange) {
+                        props.onIconHoverChange({ isMouseIn: true });
+                    }
+                }, onMouseOut: () => {
+                    setHover(false);
+                    if (props.onIconHoverChange) {
+                        props.onIconHoverChange({ isMouseIn: false });
+                    }
+                }, style: buttonStyle, children: "Open Menu" }), _jsx(Icon, {})] }));
 };
 export default BurgerIcon;

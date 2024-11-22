@@ -1,3 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { cloneElement } from "react";
 const buttonWrapperStyle = {
     position: 'absolute',
@@ -42,22 +43,15 @@ const CrossIcon = (props) => {
             return cloneElement(props.customIcon, extraProps);
         }
         else {
-            return (<span style={{ position: 'absolute', top: '6px', right: '14px' }}>
-                    {['before', 'after'].map((type, i) => (<span key={i} className={`bm-cross ${props.crossClassName}`.trim()} style={{
+            return (_jsx("span", { style: { position: 'absolute', top: '6px', right: '14px' }, children: ['before', 'after'].map((type, i) => (_jsx("span", { className: `bm-cross ${props.crossClassName}`.trim(), style: {
                         ...getCrossStyle(type),
                         ...(props.styles && props.styles.bmCross)
-                    }}/>))}
-                </span>);
+                    } }, i))) }));
         }
     };
-    return (<div className={`bm-cross-button ${props.className}`.trim()} style={{
+    return (_jsxs("div", { className: `bm-cross-button ${props.className}`.trim(), style: {
             ...buttonWrapperStyle,
             ...(props.styles && props.styles.bmCrossButton)
-        }}>
-            <button type="button" id="react-burger-cross-btn" onClick={props.onClick} style={buttonStyle} {...(!props.isOpen && { tabIndex: -1 })}>
-                Close Menu
-            </button>
-            <Icon />
-        </div>);
+        }, children: [_jsx("button", { type: "button", id: "react-burger-cross-btn", onClick: props.onClick, style: buttonStyle, ...(!props.isOpen && { tabIndex: -1 }), children: "Close Menu" }), _jsx(Icon, {})] }));
 };
 export default CrossIcon;
