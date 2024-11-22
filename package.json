@@ -1,0 +1,47 @@
+{
+  "name": "animated-menu-react",
+  "version": "1.0.2",
+  "description": "An off-canvas sidebar component with a collection of effects and styles using CSS transitions",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": "Aryan Joshi",
+  "homepage": "https://github.com/AryanJoshii/animated-menu-react.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AryanJoshii/animated-menu-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AryanJoshii/animated-menu-react.git/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [
+    "animations",
+    "component",
+    "hamburger",
+    "menu",
+    "react",
+    "react-component",
+    "typescript"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "react": "^18.3.1",
+    "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1 || >=17.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/**/*"
+  ]
+}
